@@ -1,0 +1,103 @@
+
+<div class="container " id="haut" *ngIf="!mode">
+  <div class="imageN">
+    <img [src]="etudiantImg"/>
+  </div>
+  <div class="from" *ngIf="!mode">
+  <form  form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h1>Inscription</h1>
+    <label>Nom*</label>
+      <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Entrer votre nom</mat-label>
+        <input matInput formControlName="nom"  autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" >
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+      </p>
+
+
+    <label>Prénom</label>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Entrer votre Prénom</mat-label>
+        <input matInput formControlName="prenom"  autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.prenom.errors }" >
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <label>Email</label>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Entrer votre Email</mat-label>
+        <input matInput formControlName="email"  type="email"  autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z.]{2,15}">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <label>Téléphone</label>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Entrer votre numéro de téléphone</mat-label>
+        <input matInput formControlName="phone"  type="tel" pattern="[0-9]{8,12}"  autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+        <mat-icon matSuffix>phone</mat-icon>
+        <small>Format:0612569865</small>
+      </mat-form-field>
+    </p>
+    <label>Date de naissance</label>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Entrer votre date de naissance</mat-label>
+        <input matInput formControlName="date" type="date" [ngClass]="{ 'is-invalid': submitted && f.date.errors }">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+    <label>Mot de passe</label>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Entrer votre mot de passe</mat-label>
+        <input matInput formControlName="password"  [type]="hide ? 'password' : 'text'"  autocomplete="off">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <span >{{passError}}</span>
+      </mat-form-field>
+
+    </p>
+    <label>Confirmer mot de passe</label>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Entrer à nouveau votre mot de passe</mat-label>
+        <input matInput formControlName="matchingPassword"   [type]="hide2 ? 'password' : 'text'"  autocomplete="off">
+        <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+          <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+    </p>
+
+
+
+    <section class="example-section">
+      <mat-checkbox class="example-margin" (click)="termes('news')">Je souhaite recevoir la newsletter de WATT Success</mat-checkbox><br>
+      <mat-checkbox class="example-margin"  (click)="termes('conditions')">J'accepte les termes des <a href="{{host}}/#/cgu#cgu" target="_blank">conditions générales d'utilisation</a></mat-checkbox>
+    </section>
+    <button class="valide" mat-button type="submit" *ngIf="contratValide">S'inscrire <mat-icon class="arrow ">keyboard_arrow_right</mat-icon></button>
+    <span style="color: red">{{message}}</span>
+  </form>
+</div>
+</div>
+<div class="container" *ngIf="mode">
+  <div class="mail">
+  <h3>Encore</h3>
+<h3>une dernière étape ...</h3>
+
+<p>Un e-mail de confirmation vient
+  de vous être envoyé pour pouvoir
+  activer votre compte.</p>
+    <button class="valideMail " mat-button  [routerLink]="['/']">Revenir à l'accueil<mat-icon class="arrow btnMail">keyboard_arrow_right</mat-icon></button>
+  </div>
+  <div class="imageM">
+    <img [src]="JobseekerImg"/>
+  </div>
+
+</div>
